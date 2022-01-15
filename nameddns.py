@@ -17,21 +17,31 @@ with open(os.path.join(__location__, 'config.json')) as json_file:
     host = data['host']
     type =  data['type']
     ttl = data['ttl']
+    answer = data['answer']
 
 # Get current IP
-ip = requests.get('https://api.ipify.org?format=json')
-answer = ip.json()['ip']
+base_ip = requests.get('https://api.ipify.org?format=json')
+ip = base_ip.json()['ip']
 
-# Make a request to the API
-base_url = 'https://api.name.com/v4/domains/{}/records/{}'
-url = base_url.format(domainName, id)
+if ip != answer:
+    answer = ip
+    # Write answer to config.json
+    with open(os.path.join(__location__, 'config.json'), 'w') as outfile:
+        data['answer'] = answer
+        json.dump(data, outfile, indent=4)
 
-# Create json data with host, type, answer and ttl
-base_data = { "host": host, "type": type, "answer": answer, "ttl": ttl }
-data = json.dumps(base_data)
+    # Make a request to the API
+    base_url = 'https://api.name.com/v4/domains/{}/records/{}'
+    url = base_url.format(domainName, id)
 
-# Make a request to the API
-result = requests.put(url, data=data, auth=HTTPBasicAuth(username, token))
+    # Create json data with host, type, answer and ttl
+    base_data = { "host": host, "type": type, "answer": answer, "ttl": ttl }
+    data = json.dumps(base_data)
 
-# Print the result
-print(result.json())
+    # Make a request to the API
+    result = requests.put(url, data=data, auth=HTTPBasicAuth(username, token))
+
+    # Print the result
+    print(result.json())
+else:
+    print("IP is the same, no need to update")
