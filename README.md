@@ -1,10 +1,10 @@
 # NameDDNS
 
-Dynamic DNS client for [name.com](https://www.name.com).
+Dynamic DNS script for [name.com](https://www.name.com) written in Python. It uses the [NameAPI](https://www.name.com/api) to update the IP address of a dns record.
 
 ## How to use
 
-1. Get your API token from [name.com](https://www.name.com/account/settings/api).
+1. Get your API token from [nameAPI](https://www.name.com/account/settings/api).
 2. Get a list of all records for your domain (change example.org to your domain):
 
     ```[bash]
