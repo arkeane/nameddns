@@ -1,0 +1,9 @@
+{
+    "username": "user",
+    "token": "token",
+    "domainName": "example.com",
+    "id": 12345,
+    "host": "www",
+    "type": "A",
+    "ttl": 300
+}
