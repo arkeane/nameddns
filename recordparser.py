@@ -20,19 +20,19 @@ for domain in domains.json()['domains']:
     i+=1
 
 domain_choice = int(input("Insert Domain Number: "))
-print("-------------------------------------------------------") 
+print("-------------------------------------------------------")
 domain = domains.json()['domains'][int(domain_choice)]
 
 records = requests.get(url="https://api.name.com/v4/domains/"+domain['domainName']+"/records", auth=HTTPBasicAuth(username, token))
 
-print("-------------------------------------------------------") 
+print("-------------------------------------------------------")
 print("Record list:")
 i=0
 for record in records.json()['records']:
     if record['type'] == "A":
         print(str(i)+": "+record['host']+" "+record['type']+" "+record['answer']+" "+str(record['ttl']))
     i+=1
-    
+
 
 record_choice = int(input("Insert Record Number: "))
 record = records.json()['records'][int(record_choice)]

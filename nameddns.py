@@ -44,7 +44,7 @@ if ip != answer:
         with open(os.path.join(__location__, 'config.json'), 'w') as outfile:
             data['answer'] = ip
             json.dump(data, outfile, indent=4)
-        
+
         print(result.json())
     else:
         print('ERROR: {}'.format(result.status_code))
