@@ -21,13 +21,14 @@ with open(os.path.join(__location__, 'config.json')) as json_file:
 
 # Get current IP
 base_ip = requests.get('https://api.ipify.org?format=json')
-ip = base_ip.json()['ip']
+if base_ip.status_code == 200:
+    ip = base_ip.json()['ip']
+else:
+    print('ERROR: {}'.format(base_ip.status_code))
+    exit(1)
 
 if ip != answer:
-    # Write answer to config.json
-    with open(os.path.join(__location__, 'config.json'), 'w') as outfile:
-        data['answer'] = ip
-        json.dump(data, outfile, indent=4)
+    print("INFO: IP has changed to {}, updating...".format(ip))
 
     # Make a request to the API
     base_url = 'https://api.name.com/v4/domains/{}/records/{}'
@@ -39,8 +40,14 @@ if ip != answer:
 
     # Make a request to the API
     result = requests.put(url, data=data, auth=HTTPBasicAuth(username, token))
-
-    # Print the result
-    print(result.json())
+    if result.status_code == 200:
+        with open(os.path.join(__location__, 'config.json'), 'w') as outfile:
+            data['answer'] = ip
+            json.dump(data, outfile, indent=4)
+        
+        print(result.json())
+    else:
+        print('ERROR: {}'.format(result.status_code))
+        exit(1)
 else:
-    print("IP is the same, no need to update")
+    print("INFO: IP is the same, no need to update")
