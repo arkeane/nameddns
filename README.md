@@ -7,15 +7,9 @@ Dynamic DNS script for [name.com](https://www.name.com) written in Python. It us
 ## How to use
 
 1. Get your API token from [nameAPI](https://www.name.com/account/settings/api).
-2. Get a list of all records for your domain (change example.org to your domain):
+2. User the `recordparser.py` script to fill `config.json` or manually edit the file.
 
-    ```[bash]
-    curl -u 'username:token' 'https://api.dev.name.com/v4/domains/example.org/records'
-    ```
-
-3. User the `recordparser.py` script to fill `config.json` or manually edit the file.
-
-4. To automate the script add it to crontab or whatever you use to launch scripts every x period of time. (remember to run it from path where config.json is located)
+3. To automate the script add it to crontab or whatever you use to launch scripts every x period of time. (remember to run it from path where config.json is located)
 
     - If using cron:
 
