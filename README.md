@@ -1,7 +1,5 @@
 # NameDDNS
 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LZDKH4PL5Z3XN&source=url)
-
 Dynamic DNS script for [name.com](https://www.name.com) written in Python. It uses the [NameAPI](https://www.name.com/api) to update the IP address of a dns record.
 
 ## How to use
@@ -28,3 +26,6 @@ Dynamic DNS script for [name.com](https://www.name.com) written in Python. It us
         ```[bash]
         0 */2 * * * /usr/bin/python3 path_to_script/nameddns.py &>/dev/null
         ```
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LZDKH4PL5Z3XN&source=url)
